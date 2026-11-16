@@ -1,1 +1,12 @@
-{}
+{
+  "name":"Kazuramimba Parish Management System",
+  "short_name":"Kazuramimba Parish",
+  "description":"Parokia ya Mt. Anthony wa Padua – Kazuramimba",
+  "start_url":"./",
+  "scope":"./",
+  "display":"standalone",
+  "background_color":"#f3f6fa",
+  "theme_color":"#17365d",
+  "lang":"sw",
+  "icons":[{"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any"}]
+}
