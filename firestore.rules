@@ -19,10 +19,11 @@ service cloud.firestore {
     function financeRole() { return activeStaff() && role() == 'finance_officer'; }
 
     match /staff/{uid} {
-      allow read: if activeStaff() && (request.auth.uid == uid || adminRole());
-      allow create, update, delete: if adminRole();
+      // Staff can read their own profile to establish their role after sign-in.
+      allow read: if signedIn() && request.auth.uid == uid || adminRole();
+      allow create, update: if adminRole();
+      allow delete: if false;
     }
-
     match /members/{id} {
       allow read: if activeStaff() && role() != 'finance_officer';
       allow create, update: if adminRole();
@@ -55,8 +56,7 @@ service cloud.firestore {
     }
     match /auditLogs/{id} {
       allow read: if adminRole();
-      allow create: if activeStaff()
-        && request.resource.data.uid == request.auth.uid;
+      allow create: if activeStaff() && request.resource.data.uid == request.auth.uid;
       allow update, delete: if false;
     }
     match /{document=**} {
