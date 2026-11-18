@@ -49,6 +49,11 @@ service cloud.firestore {
       allow create, update: if adminRole();
       allow delete: if false;
     }
+    match /contributionCategories/{id} {
+      allow read: if activeStaff();
+      allow create, update: if adminRole();
+      allow delete: if false;
+    }
     match /contributions/{id} {
       allow read: if activeStaff();
       allow create, update: if adminRole() || financeRole();
