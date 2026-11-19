@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="sw"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#17365d"><meta name="description" content="Mfumo wa Usimamizi wa Parokia ya Kazuramimba">
+<meta name="theme-color" content="#17365d"><meta name="description" content="Mfumo wa Usimamizi wa Parokia ya Kazuramimba"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Kazuramimba Parish"><meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./icon.svg">
 <title>Kazuramimba Parish Management System</title>
 <style>
@@ -16,7 +16,7 @@
 <div class="notice"><b>Usalama:</b> Mfumo huu sasa unaandaliwa kutumia Firebase kwa kuingia na kuhifadhi taarifa kwa pamoja. Taarifa za parokia ni za siri. Ingia kwa akaunti uliyoidhinishwa tu; pakua backup mara kwa mara na usishiriki nenosiri au faili za backup.</div>
 <section id="loginView" class="login"><h2>Ingia / Staff Login</h2><p class="muted">Tumia barua pepe na nenosiri ulilopewa na msimamizi wa parokia.</p><label>Barua pepe / Email</label><input id="email" type="email" autocomplete="username" placeholder="name@example.com"><label>Nenosiri / Password</label><input id="password" type="password" autocomplete="current-password" placeholder="Password"><button id="loginBtn" class="btn">Ingia / Sign in</button><p id="loginMsg" class="error"></p><p class="muted">Akaunti za watumishi huandaliwa na msimamizi. Hakuna usajili wa wazi wa umma.</p></section>
 <section id="appView" class="hidden">
-<div class="card topline"><div><b id="staffName">Staff</b><div class="muted" id="staffRole"></div></div><button id="logoutBtn" class="btn secondary">Toka / Sign out</button></div>
+<div class="card topline"><div><b id="staffName">Staff</b><div class="muted" id="staffRole"></div><div id="syncStatus" class="status" aria-live="polite">Inaunganisha...</div></div><button id="logoutBtn" class="btn secondary">Toka / Sign out</button></div>
 <div class="nav" id="nav">
 <button class="active" data-tab="dashboard">Muhtasari</button>
 <button data-tab="members">Waumini</button><button data-tab="families">Familia</button><button data-tab="sacraments">Sakramenti</button><button data-tab="contributions">Michango</button><button data-tab="communities">Jumuiya</button><button data-tab="transfers">Uhamisho</button><button data-tab="audit">Historia</button><button data-tab="reports">Ripoti</button><button data-tab="settings">Mipangilio</button>
