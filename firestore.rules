@@ -16,11 +16,12 @@ service cloud.firestore {
     function adminRole() {
       return activeStaff() && role() in ['parish_priest', 'assistant_priest', 'secretary'];
     }
-    function financeRole() { return activeStaff() && role() == 'finance_officer'; }
+    function financeRole() {
+      return activeStaff() && role() == 'finance_officer';
+    }
 
     match /staff/{uid} {
-      // Staff can read their own profile to establish their role after sign-in.
-      allow read: if signedIn() && request.auth.uid == uid || adminRole();
+      allow read: if (signedIn() && request.auth.uid == uid) || adminRole();
       allow create, update: if adminRole();
       allow delete: if false;
     }
@@ -61,7 +62,13 @@ service cloud.firestore {
     }
     match /auditLogs/{id} {
       allow read: if adminRole();
-      allow create: if activeStaff() && request.resource.data.uid == request.auth.uid;
+      allow create: if activeStaff()
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.email == request.auth.token.email
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.action in ['CREATE', 'UPDATE', 'CREATE_CATEGORY']
+        && request.resource.data.collection in ['members', 'families', 'sacraments', 'contributions', 'communities', 'transfers', 'contributionCategories']
+        && request.resource.data.keys().hasOnly(['action', 'collection', 'recordId', 'email', 'uid', 'createdAt', 'changedFields']);
       allow update, delete: if false;
     }
     match /{document=**} {
