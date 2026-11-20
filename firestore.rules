@@ -3,11 +3,15 @@ service cloud.firestore {
   match /databases/{database}/documents {
     function signedIn() { return request.auth != null; }
     function staffExists() {
-      return signedIn() &&
-        exists(/databases/$(database)/documents/staff/$(request.auth.uid));
+      return signedIn() && (
+        exists(/databases/$(database)/documents/staff/$(request.auth.uid)) ||
+        exists(/databases/$(database)/documents/staff/$(request.auth.token.email))
+      );
     }
     function staffData() {
-      return get(/databases/$(database)/documents/staff/$(request.auth.uid)).data;
+      return exists(/databases/$(database)/documents/staff/$(request.auth.uid))
+        ? get(/databases/$(database)/documents/staff/$(request.auth.uid)).data
+        : get(/databases/$(database)/documents/staff/$(request.auth.token.email)).data;
     }
     function activeStaff() {
       return staffExists() && staffData().active == true;
@@ -21,7 +25,7 @@ service cloud.firestore {
     }
 
     match /staff/{uid} {
-      allow read: if (signedIn() && request.auth.uid == uid) || adminRole();
+      allow read: if (signedIn() && (request.auth.uid == uid || request.auth.token.email == uid)) || adminRole();
       allow create, update: if adminRole();
       allow delete: if false;
     }
