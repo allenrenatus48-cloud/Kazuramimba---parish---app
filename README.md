@@ -16,7 +16,7 @@ Available modules:
 - Jumuiya and transfer registers
 - Dashboard, contribution reports, CSV export and print/PDF
 - Record editing, audit history and manual JSON backup
-- Role-based access for parish leadership, finance staff and read-only staff
+- Role-based access for Parish Priest, Assistant Parish Priest, Parish Secretary, authorised Parish Brother, Finance Officer and read-only staff
 
 ## Access and installation
 
@@ -34,7 +34,7 @@ Firebase project: `parish-administration-88aa6`.
 
 The application expects a Firestore document at `staff/{Firebase Authentication UID}` for each staff member. Each staff document must contain:
 - `name`: staff display name (string)
-- `role`: one of `parish_priest`, `assistant_priest`, `secretary`, `finance_officer`, `parish_brother`, `finance_officer`, `read_only`
+- `role`: one of `parish_priest`, `assistant_priest`, `secretary`, `finance_officer`, `parish_brother`, `read_only`
 - `active`: Boolean `true`
 
 The document ID must exactly match that user's Firebase Authentication UID. Do not use a display label such as "Parish Priest" as the role value; use `parish_priest`.
