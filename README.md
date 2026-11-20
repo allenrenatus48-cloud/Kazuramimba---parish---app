@@ -45,7 +45,7 @@ Firestore security rules are in `firestore.rules`. They must be deployed to the 
 
 - This repository currently represents **one parish deployment**. It is not yet a complete multi-parish diocesan tenant system. Do not add other parishes' records to this Firebase project until tenant separation and diocesan permissions have been designed and tested.
 - There is no public parishioner directory in this release. Do not make private records public.
-- Manual JSON backup is available to authorised parish administrators. It is not an automatic scheduled backup. Download backups regularly and store them securely outside the device.
+- Manual JSON backup is available to full-access parish administrators. It is not an automatic scheduled backup. On the free Firebase plan, no server-side scheduled backup has been configured. Download backups regularly and store them securely outside the device.
 - The application has not been independently security-audited or penetration-tested. Test with fictional records and separate test accounts before entering real personal, sacramental or financial data.
 - Keep Firebase rules restrictive. Never share staff passwords, authentication UIDs unnecessarily, backup files or private parish records.
 - The Firebase web configuration in a browser app is not a password. Firestore security rules and Firebase Authentication are the controls that protect data.
