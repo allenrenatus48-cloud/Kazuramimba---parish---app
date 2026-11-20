@@ -14,7 +14,7 @@ service cloud.firestore {
     }
     function role() { return staffData().role; }
     function adminRole() {
-      return activeStaff() && role() in ['parish_priest', 'assistant_priest', 'secretary'];
+      return activeStaff() && role() in ['parish_priest', 'assistant_priest', 'secretary', 'parish_brother'];
     }
     function financeRole() {
       return activeStaff() && role() == 'finance_officer';
