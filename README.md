@@ -34,7 +34,7 @@ Firebase project: `parish-administration-88aa6`.
 
 The application expects a Firestore document at `staff/{Firebase Authentication UID}` for each staff member. Each staff document must contain:
 - `name`: staff display name (string)
-- `role`: one of `parish_priest`, `assistant_priest`, `secretary`, `finance_officer`, `read_only`
+- `role`: one of `parish_priest`, `assistant_priest`, `secretary`, `finance_officer`, `parish_brother`, `finance_officer`, `read_only`
 - `active`: Boolean `true`
 
 The document ID must exactly match that user's Firebase Authentication UID. Do not use a display label such as "Parish Priest" as the role value; use `parish_priest`.
@@ -66,3 +66,12 @@ Then open Firebase Console → Firestore Database → Rules and verify that the 
 The live website is hosted from this repository's GitHub Pages deployment. Changes committed to the published branch become available after GitHub Pages finishes publishing.
 
 Repository: https://github.com/allenrenatus48-cloud/Kazuramimba---parish---app
+
+
+## Parish sub-parishes (Vigango)
+
+The current list includes Kazuramimba, Bulangamila, Nyanganga, Zeze, Kidea, Mwamila, Mazungwe, Tubila, Igamba, Kanswa, Kasablanka and Rugufu.
+
+## Full-access staff roles
+
+The application supports `parish_brother` as a full-access administrative role, alongside `parish_priest`, `assistant_priest`, and `secretary`. Each person must have their own Firebase Authentication account and a matching `staff/{UID}` document with `active: true`. Never share one login between staff members.
