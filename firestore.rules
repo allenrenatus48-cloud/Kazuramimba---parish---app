@@ -17,17 +17,18 @@ service cloud.firestore {
       return staffExists() && staffData().active == true;
     }
     function role() { return staffData().role; }
-    function adminRole() {
-      return activeStaff() && role() in ['parish_priest', 'assistant_priest', 'secretary', 'parish_brother'];
-    }
-    function financeRole() {
-      return activeStaff() && role() == 'finance_officer';
-    }
+    function adminRole() { return activeStaff(); }
+    function financeRole() { return activeStaff(); }
 
     match /staff/{uid} {
       allow read: if (signedIn() && (request.auth.uid == uid || request.auth.token.email == uid)) || adminRole();
       allow create, update: if adminRole();
       allow delete: if false;
+    }
+    match /publicDirectory/{id} {
+      // Only intentionally limited directory fields are stored here.
+      allow read: if true;
+      allow create, update, delete: if adminRole();
     }
     match /members/{id} {
       allow read: if activeStaff() && role() != 'finance_officer';
